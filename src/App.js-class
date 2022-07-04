@@ -1,0 +1,159 @@
+import logo from "./logo.svg";
+import "./App.css";
+import React,{ Component } from "react";
+
+class App extends React.Component {
+  //const names=["Đào Đình Luyện", "Nguyễn Duy Hưng","Trần Duy Hà","Nguyễn Hải Long" ];
+
+  constructor() {
+      super();
+      this.students = [
+      {
+        firstName: "Aortez",
+        lastName: "Cartwright",
+        gender: "Hermaphrodite",
+        email: "Alec14@yahoo.com",
+        id: "1",
+        mark: 9,
+      },
+      {
+        firstName: "Priscilla",
+        lastName: "Adams",
+        gender: "Cis Woman",
+        email: "Merritt6@yahoo.com",
+        id: "2",
+        mark: 8,
+      },
+      {
+        firstName: "Gillian",
+        lastName: "Nolan",
+        gender: "Trans",
+        email: "Carmelo_Jakubowski20@hotmail.com",
+        id: "3",
+        mark: 4,
+      },
+      {
+        firstName: "Vince",
+        lastName: "Lowe",
+        gender: "Neutrois",
+        email: "Keira.Swift@gmail.com",
+        id: "4",
+        mark: 7,
+      },
+      {
+        firstName: "Herminia",
+        lastName: "McLaughlin",
+        gender: "Transexual Female",
+        email: "Koby.Spinka12@yahoo.com",
+        id: "5",
+        mark: 4,
+      },
+      {
+        firstName: "Kris",
+        lastName: "Gerlach",
+        gender: "Intersex",
+        email: "Juwan23@hotmail.com",
+        id: "6",
+        mark: 7,
+      },
+      {
+        firstName: "Marguerite",
+        lastName: "Keeling",
+        gender: "Cisgender Man",
+        email: "Percy27@yahoo.com",
+        id: "7",
+        mark: 9,
+      },
+      {
+        firstName: "Amelie",
+        lastName: "Beier",
+        gender: "Intersex person",
+        email: "Amber49@yahoo.com",
+        id: "8",
+        mark: 5,
+      },
+    ];
+
+    //const list = names.map((item)=><li>{item}</li>)
+    const nameFilter = (student) => {
+      let firstName = student.firstName.toLowerCase();
+      return firstName.indexOf("m") == 0;
+    };
+    /*******************Filter**************/
+    //this.students=this.students.filter(nameFilter);
+
+    /*******************Sorting*************/
+    //this.students.sort((a, b)=>a.firstName.localeCompare(b.firstName));
+    this.students.sort((a, b) => b.mark - a.mark);
+
+    /***************style with condition********/
+    for (var i = 0; i < this.students.length; i++) {
+      if (this.students[i].mark >= 9) {
+        this.students[i].style = "table-success";
+      } else if (this.students[i].mark > 4) {
+        this.students[i].style = "table-primary";
+      } else {
+        this.students[i].style = "table-danger";
+      }
+    }
+
+    this.student_list = this.students.map((item) => (
+      // <tr className={item.style}>
+      <tr
+        className={
+          item.mark >= 9
+            ? "table-success"
+            : item.mark > 4
+            ? "table-primary"
+            : "table-danger"
+        }
+      >
+        <td>{item.firstName}</td>
+        <td>{item.lastName}</td>
+        <td>{item.email}</td>
+        <td>{item.mark}</td>
+      </tr>
+    ));
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <h2>Danh sách sinh viên</h2>
+        <table className="table">
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Mark</th>
+          </tr>
+          {this.student_list}
+        </table>
+      </div>
+    );
+  }
+
+  /*for(var i=0; i< this.students.length;i++){
+    student_list.push((<tr>
+      <td>{this.students[i].firstName}</td>
+      <td>{this.students[i].lastName}</td>
+      <td>{this.students[i].email}</td>
+    </tr>))
+  }*/
+
+  /*
+  for (var i = 0; i < this.students.length; i++) {
+    if (this.students[i].firstName.indexOf("H") == 0) {
+      student_list.push(
+        <tr>
+          <td>{this.students[i].firstName}</td>
+          <td>{this.students[i].lastName}</td>
+          <td>{this.students[i].email}</td>
+        </tr>
+      );
+    }
+  }
+  */
+}
+
+export default App;
